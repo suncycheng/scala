@@ -1,9 +1,18 @@
 # Welcome!
 This is the official repository for the [Scala Programming Language](http://www.scala-lang.org).
 
+# How to contribute
+
 To contribute to the Scala Standard Library, Scala Compiler and Scala Language Specification, please send us a [pull request](https://help.github.com/articles/using-pull-requests/#fork--pull) from your fork of this repository! We do have to ask you to sign the [Scala CLA](http://typesafe.com/contribute/cla/scala) before we can merge any of your work into our code base, to protect its open source nature.
 
-For more information on building and developing the core of Scala, read on! Please also check out our [guidelines for contributing](CONTRIBUTING.md).
+For more information on building and developing the core of Scala, read on!
+
+Please also check out:
+
+* our [guidelines for contributing](CONTRIBUTING.md).
+* the ["Scala Hacker Guide"](http://scala-lang.org/contribute/hacker-guide.html) covers some of the same ground as this README, but in greater detail and in a more tutorial style, using a running example.
+
+# Reporting issues
 
 We're still using Jira for issue reporting, so please [report any issues](https://issues.scala-lang.org) over there.
 (We would love to start using GitHub Issues, but we're too resource-constrained to take on this migration right now.)
@@ -25,21 +34,18 @@ If you need some help with your PR at any time, please feel free to @-mention an
  <img src="https://avatars.githubusercontent.com/dickwall"     height="50px" title="Dick Wall"/>            | [`@dickwall`](https://github.com/dickwall)           | process & community, documentation |
  <img src="https://avatars.githubusercontent.com/dragos"       height="50px" title="Iulian Dragos"/>        | [`@dragos`](https://github.com/dragos)               | specialization, back end |
  <img src="https://avatars.githubusercontent.com/axel22"       height="50px" title="Aleksandr Prokopec"/>   | [`@axel22`](https://github.com/axel22)               | collections, concurrency, specialization |
+ <img src="https://avatars.githubusercontent.com/janekdb"      height="50px" title="Janek Bogucki"/>        | [`@janekdb`](https://github.com/janekdb)             | documentation |
 
 P.S.: If you have some spare time to help out around here, we would be delighted to add your name to this list!
 
 # Handy Links
   - [A wealth of documentation](http://docs.scala-lang.org)
+  - [mailing lists](http://www.scala-lang.org/community/)
+  - [Gitter room for Scala contributors](https://gitter.im/scala/contributors)
   - [Scala CI](https://scala-ci.typesafe.com/)
-  - [Download the latest nightly](http://www.scala-lang.org/files/archive/nightly/2.11.x/);
-  - [(Deprecated) Scala CI at EPFL](https://scala-webapps.epfl.ch/jenkins/)
-  - Scala mailing lists:
-    - [Compiler and standard library development](https://groups.google.com/group/scala-internals)
-    - [Users of Scala](https://groups.google.com/group/scala-user)
-    - [Scala language discussion](https://groups.google.com/group/scala-language)
-    - [Scala Improvement Process](https://groups.google.com/group/scala-sips)
-    - [Debate](https://groups.google.com/group/scala-debate)
-    - [Announcements](https://groups.google.com/group/scala-announce)
+  - download the latest nightlies:
+      - [2.11.x](http://www.scala-lang.org/files/archive/nightly/2.11.x/)
+      - [2.12.x](http://www.scala-lang.org/files/archive/nightly/2.12.x/)
 
 # Repository structure
 
@@ -64,7 +70,13 @@ scala/
 
 ## Requirements
 
-You'll need a Java SDK (6 or newer), Apache Ant (version 1.8.0 or above), and curl (for `./pull-binary-libs.sh`).
+You'll need a Java SDK.  The baseline version is 6 for 2.11.x, 8 for
+2.12.x. (It's also possible to use a later SDK for local development,
+but the CI will verify against the baseline version.)
+
+You'll also need Apache Ant (version 1.9.0 or above) and curl (for `./pull-binary-libs.sh`).
+
+Mac OS X and Linux work. Windows may work if you use Cygwin. (Community help with keeping the build working on Windows is appreciated.)
 
 ## Git Hygiene
 
@@ -78,7 +90,7 @@ To pinpoint bugs, we often use git bisect, which is only effective when we can c
 
 This facilitates reviewing: a commit that reformats code can be judged quickly not to affect anything, so we can focus on the meat of the PR. It also helps when merging between long-running branches, reducing conflicts (or providing at least a limited scope for each one).
 
-Please do not @mention anyone in the commit message -- that's what the PR description and comments are for. Every time a commit is shuffled through github (in a merge in some fork, say), every @mention results in an email to that person (the core team treats them as personal email, straight to their inbox, so please don't flood us :-)).
+Please do not @-mention anyone in the commit message -- that's what the PR description and comments are for. Every time a commit is shuffled through github (in a merge in some fork, say), every @-mention results in an email to that person (the core team treats them as personal email, straight to their inbox, so please don't flood us :-)).
 
 
 ## Reviews
@@ -91,13 +103,18 @@ To help you plan your contributions, we communicate our plans on a regular basis
 
 ## Reviewing
 
-Once you've gained some experience with the code base and the process, the logical next step is to offers reviews for others's contributions. The main goal of this whole process, in the end, is to ensure the health of the Scala project by improving the quality of the code base, the documentation, as well as this process itself. Thank you for doing your part!
+Once you've gained some experience with the code base and the process, the next step is to review the contributions of others.
+
+The main goal of this whole process is to ensure the health of the Scala project by improving the quality of the code base, the documentation, as well as this process itself. Thank you for doing your part!
 
 ## [Labels](https://github.com/scala/scala/labels)
-  - `reviewed` automatically added by scabot when a comment prefixed with LGTM is posted
-  - `welcome` reviewer / queue curator adds to welcome someone's first PR (for highlighting in the release notes)
-  - `release-notes` reviewer / queue curator adds to make sure this PR is highlighted in the release notes
-  - `on-hold` added when this PR should not yet be merged, even though CI is green
+
+Label           | Description
+--------------- | -----------
+`reviewed`      | automatically added by scabot when a comment prefixed with LGTM is posted
+`welcome`       | reviewer / queue curator adds to welcome someone's first PR (for highlighting in the release notes)
+`release-notes` | reviewer / queue curator adds to make sure this PR is highlighted in the release notes
+`on-hold`       | added when this PR should not yet be merged, even though CI is green
 
 ### Tips & Tricks
 Once the `publish-core` task has completed on a commit, you can try it out in sbt as follows:
@@ -114,39 +131,12 @@ Here, `<milestone>` is the milestone targeted by the PR (e.g., 2.11.6), and `<sh
 
 ## IDE Setup
 ### Eclipse
-Download the [Scala IDE bundle](http://scala-ide.org/download/sdk.html). It comes preconfigured for optimal performance.
-
-  - Run `ant init` to download some necessary jars.
-  - Import the project (in `src/eclipse`) via `File` → `Import Existing Projects into Workspace`. Check all projects and click ok.
-
-For important details on building, debugging and file encodings, please see [the excellent tutorial on scala-ide.org](http://scala-ide.org/docs/tutorials/scalac-trunk/index.html) and the included README.md in src/eclipse.
+See `src/eclipse/README.md`.
 
 ### IntelliJ 14
-Use the latest IntelliJ IDEA release and install the Scala plugin from within the IDE.
+See `src/intellij/README.md`.
 
-The following steps are required to use IntelliJ IDEA on Scala trunk
- - Run `ant init`. This will download some JARs to `./build/deps`, which are included in IntelliJ's classpath.
- - Run src/intellij/setup.sh
- - Open ./src/intellij/scala.ipr in IntelliJ
- - File, Project Settings, Project, SDK. Create an SDK entry named "1.6" containing the Java 1.6 SDK.
-   (You may use a later SDK for local development, but the CI will verify against Java 6.)
-
-Compilation within IDEA is performed in "-Dlocker.skip=1" mode: the sources are built
-directly using the STARR compiler (which is downloaded from maven, according to `starr.version` in `versions.properties`).
-
-
-## Building with Ant
-
-NOTE: we are working on migrating the build to sbt.
-
-Run `ant build-opt` to build an optimized version of the compiler.
-Verify your build using `ant test-opt`.
-
-The Scala build system is based on Apache Ant. Most required pre-compiled
-libraries are part of the repository (in 'lib/'). The following however is
-assumed to be installed on the build machine:
-
-## Building with Sbt (EXPERIMENTAL)
+## Building with sbt (EXPERIMENTAL)
 
 The experimental sbt-based build definition has arrived! Run `sbt package`
 to build the compiler. You can run `sbt test` to run unit (JUnit) tests.
@@ -156,13 +146,32 @@ We would like to migrate to sbt build as quickly as possible. If you would
 like to help please use the scala-internals mailing list to discuss your
 ideas and coordinate your effort with others.
 
-### Tips and tricks
+## Building with Ant
+
+NOTE: we are working on migrating the build to sbt.
+
+If you are behind a HTTP proxy, include
+[`ANT_ARGS=-autoproxy`](https://ant.apache.org/manual/proxy.html) in
+your environment.
+
+Run `ant build-opt` to build an optimized version of the compiler.
+Verify your build using `ant test-opt`.
+
+The Scala build system is based on Apache Ant. Most required pre-compiled
+libraries are part of the repository (in 'lib/'). The following however is
+assumed to be installed on the build machine: TODO
+
+### Ant Tips and tricks
 
 Here are some common commands. Most ant targets offer a `-opt` variant that runs under `-optimise` (CI runs the -optimize variant).
 
-  - `./pull-binary-libs.sh` downloads all binary artifacts associated with this commit.
-  - `ant -p` prints out information about the commonly used ant targets.
-  - `ant` or `ant build`: A quick compilation (to build/quick) of your changes using the locker compiler.
+Command                 | Description
+----------------------- | -----------
+`./pull-binary-libs.sh` | downloads all binary artifacts associated with this commit.
+`ant -p`                | prints out information about the commonly used ant targets.
+`ant` or `ant build`    | A quick compilation (to `build/quick`) of your changes using the locker compiler.
+`ant dist`              | builds a distribution in 'dists/latest'.
+`ant all.clean`         | removes all build files and all distributions.
 
 A typical debug cycle incrementally builds quick, then uses it to compile and run the file
 `sandbox/test.scala` as follows:
@@ -174,17 +183,14 @@ We typically alias `build/quick/bin/scalac -d sandbox` to `qsc` and `build/quick
 `ant test-opt` tests that your code is working and fit to be committed:
 
   - Runs the test suite and bootstrapping test on quick.
-  - You can run the suite only (skipping strap) with 'ant test.suite'.
+  - You can run the suite only (skipping strap) with `ant test.suite`.
 
 `ant docs` generates the HTML documentation for the library from the sources using the scaladoc tool in quick.
-Note: on most machines this requires more heap than is allocate by default.  You can adjust the parameters with ANT_OPTS. Example command line:
+Note: on most machines this requires more heap than is allocated by default.  You can adjust the parameters with `ANT_OPTS`. Example command line:
 
+```sh
+ANT_OPTS="-Xms512M -Xmx2048M -Xss1M -XX:MaxPermSize=128M" ant docs
 ```
-ANT_OPTS = "-Xms512M -Xmx2048M -Xss1M -XX:MaxPermSize=128M" ant docs
-```
-
-  - `ant dist` builds a distribution in 'dists/latest'.
-  - `ant all.clean` Removes all build files and all distributions.
 
 ### Bootstrapping concepts
 NOTE: This is somewhat outdated, but the ideas still hold.
@@ -194,7 +200,7 @@ compiles Scala in layers. Each layer is a complete compiled Scala compiler and l
 A superior layer is always compiled by the layer just below it. Here is a short
 description of the four layers that the build uses, from bottom to top:
 
-  - `starr`: the stable reference Scala release. We use an official version of Scala (specified by `starr.version` in `versions.properties`), downloaded from maven central.
+  - `starr`: the stable reference Scala release. We use an official version of Scala (specified by `starr.version` in `versions.properties`), downloaded from the Central Repository.
   - `locker`: the local reference which is compiled by starr and is the work compiler in a typical development cycle. Add `locker.skip=true` to `build.properties` to skip this step and speed up development when you're not changing code generation. In any case, after it has been built once, it is “frozen” in this state. Updating it to fit the current source code must be explicitly requested (`ant locker.unlock`).
   - `quick`: the layer which is incrementally built when testing changes in the compiler or library. This is considered an actual new version when locker is up-to-date in relation to the source code.
   - `strap`: a test layer used to check stability of the build.
